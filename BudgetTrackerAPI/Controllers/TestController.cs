@@ -80,5 +80,23 @@ namespace BudgetTrackerAPI.Controllers
             }
             
         }
+
+        [HttpPut("UpdateTest")]
+        public ActionResult<Test> UpdateTest(Test testToUpdate)
+        {
+            try
+            {
+                using (var db = new TestContext())
+                {
+                    var updatedTest = db.Test.Update(testToUpdate);
+                    db.SaveChanges();
+                    return Ok(updatedTest.Entity);
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Error updating test", detail = e.Message });
+            }
+        }
     }
 }
