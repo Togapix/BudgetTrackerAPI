@@ -98,5 +98,29 @@ namespace BudgetTrackerAPI.Controllers
                 return BadRequest(new { message = "Error updating test", detail = e.Message });
             }
         }
+
+        [HttpDelete("DeleteTest/{idTest}")]
+        public ActionResult<Test> DeleteTest(int idTest)
+        {
+            try
+            {
+                Test testToRemove = new Test()
+                {
+                    testId = idTest
+                };
+
+                using (var db = new TestContext())
+                {
+                    
+                    var removedTest = db.Test.Remove(testToRemove); 
+                    db.SaveChanges();
+                    return Ok(removedTest.Entity);
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {message = "Error deleting test", detail = e.Message});
+            }
+        }
     }
 }

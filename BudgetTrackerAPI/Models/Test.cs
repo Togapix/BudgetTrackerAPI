@@ -24,9 +24,4 @@ namespace BudgetTrackerAPI.Models
         public float value { get; set; }
         public string type { get; set; } = "";
     }
-
-    public class TestDeleteDto
-    {
-        public int testId { get; set; }
-    }
 }
